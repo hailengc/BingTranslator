@@ -360,14 +360,26 @@ function getQueryTargetByHovering(event) {
     // It is worth noting that currently getSelection() doesn't work on the content of <textarea> and <input> elements in Firefox and Edge (Legacy).
     // HTMLInputElement.setSelectionRange() or the selectionStart and selectionEnd properties could be used to work around this.
     selection = window.getSelection();
+
+    // store all existing ranges
+    let oldRanges = [];
+    for (let index = 0; index < selection.rangeCount; index++) {
+      oldRanges.push(selection.getRangeAt(index));
+    }
+
+    // empty existing selection
     selection.empty();
     selection.addRange(range);
     selection.modify("move", "forward", "word");
     selection.modify("extend", "backward", "word");
     qstr = selection.toString().trim();
     rect = selection.getRangeAt(0).getBoundingClientRect();
-    // remeber to empty selection again
+
+    // done using, empty selection again
     selection.empty();
+
+    // restore all old ranges
+    oldRanges.forEach((range) => selection.addRange(range));
 
     // get string content of the selection and build the `query target`
     if (qstr && inRect(rect, event.clientX, event.clientY)) {
