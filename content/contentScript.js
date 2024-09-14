@@ -340,17 +340,23 @@ function getQueryTargetByHovering(event) {
     return QueryTarget.createNullTarget();
   } else {
     // convert hover caret position to client X and Y
-    if (document.caretPositionFromPoint) {
+    if (document.caretRangeFromPoint) {
+      // Use WebKit-proprietary fallback method
+      // Update: 2024-09-14:  this now seems to work in chrome, the previous working
+      // `document.caretPositionFromPoint` is not anymore.
+      range = document.caretRangeFromPoint(event.clientX, event.clientY);
+      if (range == null || !(range instanceof Range)) {
+        return QueryTarget.createNullTarget();
+      }
+      textNode = range.startContainer;
+      offset = range.startOffset;
+    } else if (document.caretPositionFromPoint) {
       range = document.caretPositionFromPoint(event.clientX, event.clientY);
+      if (range == null || !(range instanceof Range)) {
+        return QueryTarget.createNullTarget();
+      }
       textNode = range.offsetNode;
       offset = range.offset;
-    } else if (document.caretRangeFromPoint) {
-      // Use WebKit-proprietary fallback method
-      range = document.caretRangeFromPoint(event.clientX, event.clientY);
-      if (range) {
-        textNode = range.startContainer;
-        offset = range.startOffset;
-      }
     } else {
       return QueryTarget.createNullTarget();
     }
