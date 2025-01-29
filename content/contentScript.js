@@ -182,8 +182,12 @@ function getAudioUrl(contentNode, type) {
     const hdNode = contentNode.querySelector(`${ss} + .hd_tf`);
     const linkNode = hdNode.querySelector("a");
     const clickString = linkNode.getAttribute("data-mp3link");
-    return clickString.match(audioUrlRegexp)[0];
+     
+    // Update 2025-01-29:
+    // click string now is: `/dict/mediamp3?blob=audio%2Ftom%2F12%2Fe1%2F12E11E186018D1050FF711C3471AA639.mp3`
+    return `https://bing.com/${clickString}`;
   } catch (error) {
+    console.error("Load audio from BingDict failed.");
     return null;
   }
 }
@@ -218,7 +222,7 @@ function convertFromBingResponseContent(htmlContent, queryString) {
 
       // get pronunciation
       const pronNode = contentNode.querySelector(".hd_p1_1");
-      // make sure we don't render audio element if security policy violation is detected
+       // make sure we don't render audio element if security policy violation is detected
       const pron =
         !isSecurityPolicyViolationDetected && pronNode
           ? {
