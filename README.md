@@ -4,6 +4,16 @@
 
 A Chrome extension for Chiese-English/English-Chinese translating. Support mouse hovering and selection.Based on https://www.bing.com/dict.
 
+## 安装 ( Installation )
+
+* Chrome web store:  https://chromewebstore.google.com/detail/bingtranslatorx/jjeahpiblnooclghjhjmcdhlmmfpdjkh
+* Edge add-on: https://microsoftedge.microsoft.com/addons/detail/bingtranslatorx/cdhfjnkkjbdaoogiifeajdomiiepijai
+  
+
+## 报告Bug或建议 (Bug Report or feedback)
+
+- [报告Bug或者提交建议](https://github.com/hailengc/BingTranslatorX/issues)
+- Emaail to developer: hailengc@gmail.com
 
 ## 截屏示例 (Screenshots)
 
@@ -21,10 +31,6 @@ A Chrome extension for Chiese-English/English-Chinese translating. Support mouse
 
   ![setting](images/ss/setting.png)
 
-## 错误报告 (Bug Report)
-
-- Email: hailengc@gmail.com
-- [Create an issue](https://github.com/hailengc/BingTranslatorX/issues)
 
 ## 感谢 (Thanks)
 
