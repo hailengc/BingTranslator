@@ -187,7 +187,7 @@ function getAudioUrl(contentNode, type) {
     // returned `data-mp3link` now is: `/dict/mediamp3?blob=audio%2Ftom%2F12%2Fe1%2F12E11E186018D1050FF711C3471AA639.mp3`
     return `https://bing.com/${clickString}`;
   } catch (error) {
-    console.error("Load audio from BingDict failed.");
+    // for any reason we failed, that's fine and be silent
     return null;
   }
 }
